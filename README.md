@@ -115,15 +115,21 @@ $('body').html(tmpText(数据源));
 
 区域：<div id="J_parent"></div>   
 
-数据源： var data = {"html":"<div style='background: #f00; height: 30px; line-height: 30px;'>html元素</div>"}
+数据源： var data = {"name":"Jake","age":31}
 
 模板：
   <script id="J_child" type="text/template">
-	{{! it.html}}
+	{{? it.name }}
+	    <div>Oh, I love your name, {{=it.name}}!</div>
+	{{?? it.age === 0}}
+	    <div>Guess nobody named you yet!</div>
+	{{??}}
+	    You are {{=it.age}} and still don't have a name?
+	{{?}}
   </script>
   
 调用：             
-  var data = {"html":"<div style='background: #f00; height: 30px; line-height: 30px;'>html元素</div>"};
+  var data = {"name":"Jake","age":31};
   var interText = doT.template($("#J_child").text());
   $("#J_prt1").html(interText(data));
 ```
@@ -150,8 +156,6 @@ $('body').html(tmpText(数据源));
 格式：片段{{##def.snippet: html片段 #}}{{#def.snippet}} ，若值中包含规则语句使用（包含在片段中）：{{#def.joke}}   
 
 区域：<div id="J_parent"></div>   
-
-数据源： var data = {"html":"<div style='background: #f00; height: 30px; line-height: 30px;'>html元素</div>"}
 
 模板：
   <script id="J_child" type="text/template">

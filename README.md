@@ -7,7 +7,7 @@ doTjs前端javascript模板引擎,Node.js和浏览器同样适用
 {{ }} for循环json 
 {{~ }} 循环数组      
 {{? }} if 条件语句           
-{{! }} html标签是否转义           
+{{! }} html标签不转义           
 {{# }} for compile-time evaluation/includes and partials           
 {{## #}} for compile-time defines               
 ```
@@ -108,4 +108,62 @@ $('body').html(tmpText(数据源));
   var data = {"name":"莉莉", age:27, tel: 134533298880};
   var interText = doT.template($("#J_child").text());
   $("#J_prt1").html(interText(data));
+```
+- if条件判断：
+```
+格式：{{? }}    
+
+区域：<div id="J_parent"></div>   
+
+数据源： var data = {"html":"<div style='background: #f00; height: 30px; line-height: 30px;'>html元素</div>"}
+
+模板：
+  <script id="J_child" type="text/template">
+	{{! it.html}}
+  </script>
+  
+调用：             
+  var data = {"html":"<div style='background: #f00; height: 30px; line-height: 30px;'>html元素</div>"};
+  var interText = doT.template($("#J_child").text());
+  $("#J_prt1").html(interText(data));
+```
+- html标签不转义：
+```
+格式：{{! }}    
+
+区域：<div id="J_parent"></div>   
+
+数据源： var data = {"html":"<div style='background: #f00; height: 30px; line-height: 30px;'>html元素</div>"}
+
+模板：
+  <script id="J_child" type="text/template">
+	{{! it.html}}
+  </script>
+  
+调用：             
+  var data = {"html":"<div style='background: #f00; height: 30px; line-height: 30px;'>html元素</div>"};
+  var interText = doT.template($("#J_child").text());
+  $("#J_prt1").html(interText(data));
+```
+- 编译时为片段中符合规则的语句赋值：
+```
+格式：片段{{##def.snippet: html片段 #}}{{#def.snippet}} ，若值中包含规则语句使用（包含在片段中）：{{#def.joke}}   
+
+区域：<div id="J_parent"></div>   
+
+数据源： var data = {"html":"<div style='background: #f00; height: 30px; line-height: 30px;'>html元素</div>"}
+
+模板：
+  <script id="J_child" type="text/template">
+	{{##def.snippet:
+	    <div>{{=it.name}}</div>{{#def.joke}}
+	#}}
+	{{#def.snippet}}
+  </script>
+  
+调用：             
+  var dataPart = {"name":"Jake","age":31};
+  var defPart = {"joke":"<div>{{=it.name}} who?</div>"};
+  var interText = doT.template($("#J_child").text(), undefined, defPart);
+  $("#J_prt").html(interText(dataPart));
 ```

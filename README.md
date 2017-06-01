@@ -2,6 +2,7 @@
 doTjs前端javascript模板引擎,Node.js和浏览器同样适用
 
 #### 使用方法：
+```
 {{= }} 赋值 
 {{ }}    
 {{~ }} for循环数组      
@@ -9,7 +10,7 @@ doTjs前端javascript模板引擎,Node.js和浏览器同样适用
 {{! }} html标签是否转义           
 {{# }} for compile-time evaluation/includes and partials           
 {{## #}} for compile-time defines               
-
+```
 
 #### dot.js调用方式：
 ```
@@ -23,7 +24,17 @@ $('body').html(tmpText(数据源));
 #### 调用例子：
 
 - 赋值：
-格式：{{= }}       
-数据源： var data = {"name":"莉莉", age:27}       
-模板：        
-调用：      
+```
+格式：{{= }}  
+区域：<div id="J_parent"></div>            
+数据源： var data = {"name":"莉莉", age:27}       
+模板：  
+  <script id="J_child" type="text/template">
+		<div>Hi, My name is {{=it.name}}!</div>
+		<div>{{=it.age || ''}}</div>
+	</script>
+调用： 
+  var data = {"name":"Jake","age":27};
+	var interText = doT.template($("#J_child1").text());
+	$("#J_prt1").html(interText(data));
+```

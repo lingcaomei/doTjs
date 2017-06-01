@@ -14,17 +14,17 @@ doTjs前端javascript模板引擎,Node.js和浏览器同样适用
 
 #### 语句
 ```
-1、for循环json
+-1、for循环json
 {{ for var key in data { }} 
 {{= key }} 
 {{ } }}
 
-2、循环数组：data.array 传进来的数据，item是每项，index是每项的下标
+-2、循环数组：data.array 传进来的数据，item是每项，index是每项的下标
 {{~data.array:item:index }}
 {{= item}}
 {{~}}
 
-3、if判断   
+-3、if判断   
 {{? }} if
 {{?? }} else if
 {{??}} else

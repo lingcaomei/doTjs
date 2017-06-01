@@ -14,17 +14,20 @@ doTjs前端javascript模板引擎,Node.js和浏览器同样适用
 
 #### 语句
 ```
-- 1、for循环json
+1、for循环json
+
 {{ for var key in data { }} 
 {{= key }} 
 {{ } }}
 
--2、循环数组：data.array 传进来的数据，item是每项，index是每项的下标
+2、循环数组：data.array 传进来的数据，item是每项，index是每项的下标
+
 {{~data.array:item:index }}
 {{= item}}
 {{~}}
 
--3、if判断   
+3、if判断 
+
 {{? }} if
 {{?? }} else if
 {{??}} else
@@ -58,6 +61,27 @@ $('body').html(tmpText(数据源));
   
 调用：             
   var data = {"name":"Jake","age":27};
+  var interText = doT.template($("#J_child1").text());
+  $("#J_prt1").html(interText(data));
+```
+- for循环json：
+```
+格式：{{ {}}    
+
+区域：<div id="J_parent"></div>   
+
+数据源： var data = {"name":"莉莉", age:27, tel: 134533298880}
+
+模板：  
+  <script id="J_child" type="text/template">
+	{{for(var key in it) {}}   
+	    <div>KEY: {{=key}}</div>
+	    <div>KEY: {{= it[key]}}</div>
+	{{{} }}
+  </script>
+  
+调用：             
+  var data = {"name":"莉莉", age:27, tel: 134533298880};
   var interText = doT.template($("#J_child1").text());
   $("#J_prt1").html(interText(data));
 ```

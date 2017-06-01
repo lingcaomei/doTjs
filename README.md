@@ -4,7 +4,7 @@ doTjs前端javascript模板引擎,Node.js和浏览器同样适用
 #### 使用方法：
 ```
 {{= }} 赋值 
-{{ {}} for循环json 
+{{ }} for循环json 
 {{~ }} 循环数组      
 {{? }} if 条件语句           
 {{! }} html标签是否转义           
@@ -16,7 +16,7 @@ doTjs前端javascript模板引擎,Node.js和浏览器同样适用
 ```
 1、for循环json
 
-{{ for var key in data { }} 
+{{ for (var key in data){ }} 
 {{= key }} 
 {{ } }}
 
@@ -61,27 +61,51 @@ $('body').html(tmpText(数据源));
   
 调用：             
   var data = {"name":"Jake","age":27};
-  var interText = doT.template($("#J_child1").text());
+  var interText = doT.template($("#J_child").text());
   $("#J_prt1").html(interText(data));
 ```
 - for循环json：
 ```
-格式：{{ {}}    
+格式：{{ }}    
 
 区域：<div id="J_parent"></div>   
 
 数据源： var data = {"name":"莉莉", age:27, tel: 134533298880}
 
-模板：  
-  <script id="J_child" type="text/template">
-	{{for(var key in it) {}}   
+模板： for(var key in it){ } for语句 分别用{{ }} 包裹
+  <script id="J_child" type="text/template">
+	{{for(var key in it){ }}   
 	    <div>KEY: {{=key}}</div>
 	    <div>KEY: {{= it[key]}}</div>
-	{{{} }}
+	{{} }}
   </script>
-  
+  
+  //    [[for(var key in it){ ]] 
+  //	    <div>KEY: {{=key}}</div>
+  //	    <div>KEY: {{= it[key]}}</div>
+  //	[[} ]]
 调用：             
   var data = {"name":"莉莉", age:27, tel: 134533298880};
-  var interText = doT.template($("#J_child1").text());
+  var interText = doT.template($("#J_child").text());
+  $("#J_prt1").html(interText(data));
+```
+- 循环数组：
+```
+格式：{{~ }}    
+
+区域：<div id="J_parent"></div>   
+
+数据源： var data = {"fruit":["apple","pear","watermelon"]}
+
+模板：
+  <script id="J_child" type="text/template">
+	{{~ it.fruit:item:index }}
+	    <div>{{=index}}、{{=item}}</div>
+	{{~}}
+  </script>
+  
+调用：             
+  var data = {"name":"莉莉", age:27, tel: 134533298880};
+  var interText = doT.template($("#J_child").text());
   $("#J_prt1").html(interText(data));
 ```

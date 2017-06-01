@@ -30,11 +30,11 @@ $('body').html(tmpText(数据源));
 数据源： var data = {"name":"莉莉", age:27}       
 模板：  
   <script id="J_child" type="text/template">
-		<div>Hi, My name is {{=it.name}}!</div>
-		<div>{{=it.age || ''}}</div>
-	</script>
-调用： 
+	<div>Hi, My name is {{=it.name}}!</div>
+	<div>{{=it.age || ''}}</div>
+  </script>
+调用：             
   var data = {"name":"Jake","age":27};
-	var interText = doT.template($("#J_child1").text());
-	$("#J_prt1").html(interText(data));
+  var interText = doT.template($("#J_child1").text());
+  $("#J_prt1").html(interText(data));
 ```
